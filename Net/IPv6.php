@@ -550,7 +550,7 @@ class Net_IPv6
 
         if (false !== strpos($uip, '::') ) {
 
-            list($ip1, $ip2, $ip3) = explode('::', $uip);
+            list($ip1, $ip2) = explode('::', $uip, 2);
 
             if ("" == $ip1) {
 
@@ -598,13 +598,6 @@ class Net_IPv6
             if (-1 == $c1 && -1 == $c2) { // ::
 
                 $uip = "0:0:0:0:0:0:0:0";
-
-                if (isset($ip3)) { // ::::xxx - not good
-                    if ("" == $ip3) { // ::::
-                        $ip3 = 0; // Give back a 9th "0"
-                    }
-                    $uip .= ":" . $ip3;
-                }
 
             } else if (-1 == $c1) {              // ::xxx
 
