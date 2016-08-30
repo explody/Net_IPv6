@@ -1043,10 +1043,10 @@ class Net_IPv6
      *                   compressed IPs are allowed
      *
      * @return String the binary representation
-     * @access private
+     * @access public
      * @since 1.1.0
      */
-    protected static function _ip2Bin($ip)
+    public static function _ip2Bin($ip)
     {
         $binstr = '';
 
@@ -1074,10 +1074,10 @@ class Net_IPv6
      * @param String $bin the IP address as binary
      *
      * @return String the uncompressed Hex representation
-     * @access private
+     * @access public
      * @since 1.1.0
      */
-    protected static function _bin2Ip($bin)
+    public static function _bin2Ip($bin)
     {
         $ip = "";
 
