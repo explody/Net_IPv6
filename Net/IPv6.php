@@ -894,31 +894,23 @@ class Net_IPv6
         if (!empty($ipPart[0])) {
             $ipv6 = explode(':', $ipPart[0]);
 
-			if(8 < count($ipv6)) {
+			if (8 < count($ipv6)) {
 				return false;
 			}
 
-            foreach($ipv6 as $element) { // made a validate precheck
-                if(!preg_match('/^[0-9a-fA-F]*$/', $element)) {
+            foreach ($ipv6 as $element) {
+                if (4 < strlen($element) || 0 == strlen($element)) {
                     return false;
                 }
-            }
-
-            for ($i = 0; $i < count($ipv6); $i++) {
-
-                if ((4 < strlen($ipv6[$i])) || (0 == strlen($ipv6[$i]))) {
-
+                if (!preg_match('/^[0-9a-fA-F]*$/', $element)) {
                     return false;
-
                 }
 
-                $dec = hexdec($ipv6[$i]);
-                $hex = strtoupper(preg_replace("/^[0]{1,3}(.*[0-9a-fA-F])$/",
-                                                "\\1",
-                                                $ipv6[$i]));
+                $dec = hexdec($element);
+                $hex = str_pad(ltrim($element, '0'), 1, '0');
 
-                if ($ipv6[$i] >= 0 && $dec <= 65535
-                    && $hex == strtoupper(dechex($dec))) {
+                if ($element >= 0 && $dec <= 65535
+                    && strtolower($hex) == strtolower(dechex($dec))) {
 
                     $count++;
 
