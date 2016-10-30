@@ -894,17 +894,17 @@ class Net_IPv6
         if (!empty($ipPart[0])) {
             $ipv6 = explode(':', $ipPart[0]);
 
-			if (8 < count($ipv6)) {
-				return false;
-			}
+            if (8 < count($ipv6)) {
+                return false;
+            }
 
-            foreach ($ipv6 as $element) {
-                if (4 < strlen($element) || 0 == strlen($element)) {
+            foreach($ipv6 as $element) { // made a validate precheck
+                if (!preg_match('/^[0-9a-fA-F]{1,4}$/', $element)) {
                     return false;
                 }
-                if (!preg_match('/^[0-9a-fA-F]*$/', $element)) {
-                    return false;
-                }
+            }
+
+            foreach($ipv6 as $element) {
 
                 $dec = hexdec($element);
                 $hex = str_pad(ltrim($element, '0'), 1, '0');
