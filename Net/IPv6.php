@@ -909,7 +909,7 @@ class Net_IPv6
                 $dec = hexdec($element);
                 $hex = str_pad(ltrim($element, '0'), 1, '0');
 
-                if ($element >= 0 && $dec <= 65535
+                if ($dec >= 0 && $dec <= 65535
                     && strtolower($hex) == strtolower(dechex($dec))) {
 
                     $count++;
